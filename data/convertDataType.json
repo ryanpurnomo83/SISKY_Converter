@@ -1,0 +1,18 @@
+{
+    "question-banks": [
+        { "value": "docx", "label": "DOCX",       "icon": "bi-file-earmark-word text-primary" },
+        { "value": "xml",  "label": "Moodle XML", "icon": "bi-filetype-xml text-warning" }
+    ],
+    "question-banks-result" : [
+        { "value": "txt", "label": "TXT",       "icon": "bi-filetype-txt text-secondary" }
+    ],
+    "assignment-results": [
+        { "value": "pdf",  "label": "PDF",       "icon": "bi-file-earmark-pdf text-danger" },
+        { "value": "docx", "label": "DOCX",      "icon": "bi-file-earmark-word text-primary" },
+        { "value": "csv",  "label": "CSV/Excel", "icon": "bi-file-earmark-spreadsheet text-success" }
+    ],
+    "question-answer": [
+        { "value": "pdf",  "label": "PDF",  "icon": "bi-file-earmark-pdf text-danger" },
+        { "value": "docx", "label": "DOCX", "icon": "bi-file-earmark-word text-primary" }
+    ]
+}

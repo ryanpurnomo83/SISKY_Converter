@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SISKY Document Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <main class="page">
+        <img src="{{ url_for('static', filename='images/sisky-logo.png') }}" alt="SISKY" class="logo">
+
+        <section class="card">
+            <h1 style="text-align: center;">Document Converter</h1>
+            <div class="dropdown js-dropdown" style="margin-top: 1%;" data-formats='{{ format_map|tojson }}'>
+                <!--<input type="hidden" name="format" id="format-input" value="">-->
+                <input type="hidden" name="doc_type" value="question-banks" form="convert-form">
+                <button type="button" class="dropdown-toggle convertOption" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="dropdown-label">Question Banks</span>
+                </button>
+                <ul class="dropdown-menu" role="listbox">
+                    <li role="option" data-value="question-banks" data-accept=".qb">
+                        <span>Question Banks</span>
+                    </li>
+                    <li role="option" data-value="assignment-results" data-accept=".ar">
+                        <span>Assignment Results</span>
+                    </li>
+                    <li role="option" data-value="question-answer" data-accept=".qa">
+                        <span>Question + Answer</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex flex-col gap-3">
+                <div class="dropdown js-dropdown" style="margin-top: 4%;" data-formats='{{ format_map|tojson }}'>
+                    <!--<input type="hidden" name="format" id="format-input" value="pdf">-->
+                    <input type="hidden" name="format" value="pdf" form="convert-form">
+                    <button type="button" class="dropdown-toggle convertOptionType" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-expanded="false">
+                        <i class="bi bi-file-earmark-pdf" style="color:#dc2626"></i><span class="dropdown-label"> PDF</span>
+                        <!-- <i class="bi bi-chevron-down caret"></i> -->
+                    </button>
+                    <ul class="dropdown-menu" role="listbox"></ul>
+                </div>
+
+                <div class="dropdown js-dropdown d-none" style="margin-top: 4%;">
+                    <input type="hidden" name="format_result" value="" form="convert-form" disabled>
+                    <button type="button" class="dropdown-toggle convertOptionType" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-expanded="false">
+                        <i class="bi bi-filetype-txt"></i><span class="dropdown-label"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="listbox"></ul>
+                </div>
+            </div>
+            <br>
+            <form action="{{ url_for('convert') }}" method="post" enctype="multipart/form-data" id="convert-form">
+                <label class="dropzone" for="file" id="dropzone">
+                    <input type="file" name="file" id="file" accept=".docx" required>
+                    <span class="dropzone-title" id="file-name">Input File</span>
+                    <span class="dropzone-hint">atau tarik dan lepas file ke sini</span>
+                </label>
+                <button type="submit" class="btn btn-primary">Konversi Dokumen</button>
+            </form>
+
+            {% if error %}
+                <div class="notice notice-error" role="alert">{{ error }}</div>
+            {% endif %}
+
+            {% if result %}
+                <div class="result"
+                     id="result-box"
+                     data-result="{{ result|e }}"
+                     data-download-name="{{ download_name|e }}">
+                    <div class="result-head">
+                        <h2>{{ count }} soal berhasil dikonversi</h2>
+                        <div class="result-actions">
+                            <button type="button" class="btn btn-ghost" id="copy-btn">Salin</button>
+                            <button type="button" class="btn btn-primary" id="download-btn">Unduh .txt</button>
+                        </div>
+                    </div>
+
+                    {% if warnings %}
+                        <div class="notice notice-warn">
+                            <strong>Perlu dicek manual:</strong>
+                            <ul>
+                                {% for w in warnings %}
+                                    <li>{{ w }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <pre>{{ result }}</pre>
+                </div>
+            {% endif %}
+        </section>
+
+        <details class="guide">
+            <summary>Format penulisan soal di Word</summary>
+            <pre class="guide-sample">1. Ibu kota Indonesia adalah ...
+                a. Bandung
+                *b. Jakarta
+                c. Surabaya
+                d. Medan
+            </pre>
+            <p>Tandai satu jawaban benar dengan tanda bintang (*) di depan huruf pilihan.</p>
+        </details>
+    </main>
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

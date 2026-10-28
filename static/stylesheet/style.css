@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap');
+
+:root {
+    /* Ganti --accent dengan warna utama logo SISKY agar serasi */
+    --accent: #0f58d5;
+    --accent-dark: #0f58d5;
+    --accent-soft: #e6eaf2;
+    --ink: #1c2530;
+    --muted: #5d6b79;
+    --paper: #eef1f5;
+    --card: #ffffff;
+    --line: #d5dce4;
+    --warn-bg: #fff6e0;
+    --warn-line: #e3b341;
+    --error-bg: #fdecec;
+    --error-line: #d65454;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+}
+
+pre, .guide-sample {
+    font-family: 'Source Code Pro', monospace;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    gap: 28px;
+}
+
+.logo {
+    width: 120%;
+    max-width: 400px;
+    height: auto;
+}
+
+.card {
+    width: 100%;
+    max-width: 640px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 12px 32px -16px rgba(28, 37, 48, 0.25);
+}
+
+h1 {
+    margin: 0 0 6px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.lead {
+    margin: 0 0 24px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+    .convertOption{
+        margin: 0 auto;
+    }
+}
+
+.convertOption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    gap: 8px;
+    padding: 8px 40px;
+    white-space: nowrap; 
+    border: 2px var;
+    border-radius: 12px;
+    background: #fafbfc;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.convertOptionType {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 190px;
+    /* margin: 0 auto; */
+    gap: 2px;
+    padding: 8px 40px;
+    white-space: nowrap; 
+    border: 2px var;
+    border-radius: 12px;
+    background: #fafbfc;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.dropdown-menu li {
+    padding: 6px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.dropdown-toggle{
+    position: relative;
+}
+
+.dropdown-toggle::after{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    margin: -0.15em 0 0 0;
+    transition: transform 0.2s ease;
+}
+
+.dropdown-toggle.show::after,
+.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}
+
+/* Animasi muncul untuk daftar menu */
+.dropdown-menu.show {
+    animation: dropdown-in 0.18s ease-out;
+}
+
+@keyframes dropdown-in {
+    from {
+        opacity: 0;
+        translate: 0 -6px;
+    }
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+/* Dropzone */
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px var(--accent);
+    padding: 36px 20px;
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    background: #fafbfc;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.dropzone:hover,
+.dropzone.is-over {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.dropzone.has-file {
+    border-style: solid;
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.dropzone input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dropzone:focus-within {
+    outline: 3px solid rgba(72, 130, 255, 0.35);
+    outline-offset: 2px;
+}
+
+.dropzone-title {
+    font-weight: 600;
+    word-break: break-all;
+}
+
+.dropzone-hint {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* Tombol */
+.btn {
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 11px 20px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(31, 111, 92, 0.35);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: var(--accent-dark); }
+
+.btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+}
+.btn-ghost:hover { background: var(--paper); }
+
+#convert-form .btn {
+    width: 100%;
+    margin-top: 16px;
+}
+
+/* Pesan */
+.notice {
+    margin-top: 20px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border-left: 4px solid;
+    font-size: 0.9rem;
+}
+.notice ul { margin: 6px 0 0; padding-left: 20px; }
+.notice-error { background: var(--error-bg); border-color: var(--error-line); }
+.notice-warn  { background: var(--warn-bg);  border-color: var(--warn-line); }
+
+/* Hasil */
+.result {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.result-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.result-actions { display: flex; gap: 8px; }
+.result-actions .btn { padding: 8px 16px; font-size: 0.85rem; }
+
+.result pre {
+    margin: 16px 0 0;
+    padding: 16px;
+    max-height: 340px;
+    overflow: auto;
+    background: #1c2530;
+    color: #e6edf3;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Panduan format */
+.guide {
+    width: 100%;
+    max-width: 640px;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+.guide summary { cursor: pointer; font-weight: 500; }
+.guide-sample {
+    margin: 12px 0 8px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--ink);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+    .card { padding: 24px 20px; }
+    h1 { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
